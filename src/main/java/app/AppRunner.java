@@ -1,7 +1,10 @@
 package main.java.app;
 
+import main.java.app.model.Account;
 import main.java.app.model.Skill;
+import main.java.app.repository.AccountRepository;
 import main.java.app.repository.SkillRepository;
+import main.java.app.repository.io.JavaIOAccountRepositoryImpl;
 import main.java.app.repository.io.JavaIOSkillRepositoryImpl;
 
 import java.io.IOException;
@@ -9,39 +12,26 @@ import java.io.IOException;
 public class AppRunner {
     public static void main(String[] args) throws IOException {
 
-        SkillRepository sr = new JavaIOSkillRepositoryImpl();
+        AccountRepository ar = new JavaIOAccountRepositoryImpl();
 
-        Skill skill1 = new Skill();
-        skill1.setId(1L);
-        skill1.setName("Python");
+        Account account = new Account();
+        account.setId(1L);
+        account.setLogin("Vladislav");
 
-        Skill skill2 = new Skill();
-        skill2.setId(2L);
-        skill2.setName("Java");
-
-        Skill skill3 = new Skill();
-        skill3.setId(3L);
-        skill3.setName("CPP");
-
-        Skill skill4 =new Skill();
-        skill4.setId(4L);
-        skill4.setName("CSS");
+        Account account1 = new Account();
+        account1.setId(2L);
+        account1.setLogin("Vladislav");
 
 
-        sr.save(skill1);
-        sr.save(skill2);
-        sr.save(skill3);
-        sr.save(skill4);
+        ar.save(account);
+        ar.save(account1);
 
-        Skill skill5 = new Skill(1L,"JavaSript");
-        sr.update(skill5);
+        Account account2 = new Account(1L,"Eugeniy");
+        ar.update(account2);
 
-        Skill skill6 = new Skill(2L,"HTML");
-        sr.update(skill6);
-
-        System.out.println(sr.getById(2L));
-        System.out.println(sr.findAll());
-        sr.delete(3L);
+        System.out.println(ar.getById(2L));
+        System.out.println(ar.findAll());
+        ar.delete(2L);
 
     }
 }
