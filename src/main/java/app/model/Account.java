@@ -4,14 +4,12 @@ public class Account extends BaseEntity {
     private String login;
     private String password;
 
-    public Account(){};
-
     public Account(Long id, String login) {
         super(id);
         this.login = login;
         //this.password = password;
 
-    };
+    }
 
     public String getLogin() {
         return login;
@@ -31,6 +29,6 @@ public class Account extends BaseEntity {
 
     @Override
     public String toString() {
-        return this.getId() + " user is " + this.getLogin();
+        return this.getId() + "/" + this.getLogin();
     }
 }
