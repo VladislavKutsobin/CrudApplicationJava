@@ -1,7 +1,7 @@
 package main.java.app;
 
 import main.java.app.model.Account;
-import main.java.app.model.Developers;
+import main.java.app.model.Developer;
 import main.java.app.model.Skill;
 import main.java.app.repository.AccountRepository;
 import main.java.app.repository.DeveloperRepository;
@@ -17,7 +17,7 @@ import java.util.Set;
 
 public class AppRunner {
     public static void main(String[] args) throws IOException {
-        SkillRepository sr = new JavaIOSkillRepositoryImpl();
+        /*SkillRepository sr = new JavaIOSkillRepositoryImpl();
         AccountRepository ar = new JavaIOAccountRepositoryImpl();
         DeveloperRepository dv = new JavaDeveloperRepositoryImpl();
 
@@ -60,5 +60,24 @@ public class AppRunner {
 
         System.out.println(dv.findAll());
         System.out.println(dv.getById(2L));
+        */
+        SkillRepository sr = new JavaIOSkillRepositoryImpl();
+        DeveloperRepository dr = new JavaDeveloperRepositoryImpl();
+
+        Skill sk1 = new Skill(1L, "Java");
+        Skill sk2 = new Skill(2L, "Python");
+
+        Set<String> skillSet = new HashSet<>();
+        skillSet.add(sk1.getId()+ ")" + sk1.getName());
+        skillSet.add(sk2.getId()+ ")" + sk2.getName());
+
+        //Developer dev = new Developer(1L, "Vladislav", "Kutsobin", skillSet);
+        //dr.save(dev);
+        //Developer dev1 = new Developer(2L, "Vladimir", "Javovich", skillSet);
+        //dr.save(dev1);
+
+        System.out.println(dr.findAll());
+
+
     }
 }
