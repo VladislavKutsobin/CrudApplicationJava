@@ -1,34 +1,27 @@
 package main.java.app.model;
 
 public class Account extends BaseEntity {
-    private String login;
-    private String password;
+    private String developerData;
 
-    public Account(Long id, String login) {
+    public Account() {
+    }
+
+    public String getDeveloperData() {
+        return developerData;
+    }
+
+    public void setDeveloperData(String developerData) {
+        this.developerData = developerData;
+    }
+
+    public Account(Long id, String developerData) {
         super(id);
-        this.login = login;
-        //this.password = password;
-
+        this.developerData = developerData;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {
-        return this.getId() + "/" + this.getLogin();
+        return super.getId() + " " + developerData;
     }
 }

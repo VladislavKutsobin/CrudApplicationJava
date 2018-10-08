@@ -1,24 +1,28 @@
 package main.java.app.repository.io;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import main.java.app.model.Skill;
 import main.java.app.repository.SkillRepository;
-import java.util.*;
-import java.io.*;
-
 
 public class JavaIOSkillRepositoryImpl implements SkillRepository {
-    private static final String SKILL_FILE_PATH = "src/main/resources/Skills.txt";
+
+    private static final String SKILL_FILE_PATH = "src/main/resources/skills.txt";
+
 
     @Override
     public void save(Skill skill) throws IOException {
-        File fn = new File(SKILL_FILE_PATH);
-        FileWriter fw = new FileWriter(fn, true);
+        File fileWithSkills = new File(SKILL_FILE_PATH);
+        FileWriter fw = new FileWriter(fileWithSkills,true);
         try (BufferedWriter bw = new BufferedWriter(fw)) {
             String skillToStringRepresentation = skill.getId() + "." + skill.getName();
             bw.write(skillToStringRepresentation);
             bw.newLine();
         }
     }
+
 
     @Override
     public List<Skill> findAll() throws IOException {
@@ -41,6 +45,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
             return skillList;
         }
     }
+
 
     @Override
     public void update(Skill skill) throws IOException {
@@ -73,8 +78,9 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         }
     }
 
+
     @Override
-    public void delete(Long id) throws IOException{
+    public void delete(Long id) throws IOException {
         File fileWithSkills = new File(SKILL_FILE_PATH);
         List<String> list = new ArrayList<>();
         FileReader fr = new FileReader(fileWithSkills);
@@ -99,16 +105,19 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         }
     }
 
+
     @Override
     public Skill getById(Long id) throws IOException {
-        File file = new File(SKILL_FILE_PATH);
-        FileReader fr = new FileReader(file);
-        BufferedReader bf = new BufferedReader(fr);
-        String line;
-        while ((line = bf.readLine()) != null) {
-            String[] retLine = line.split("\\.");
-            if (retLine[0].equals(Long.toString(id))) {
-                return new Skill(id, retLine[1]);
+        File fileWithSkills = new File(SKILL_FILE_PATH);
+        FileReader fr = new FileReader(fileWithSkills);
+        try (BufferedReader bf = new BufferedReader(fr)) {
+            String line;
+
+            while ((line = bf.readLine()) != null) {
+                String[] arrOfStr = line.split("\\.");
+                if(arrOfStr[0].equals(Long.toString(id))){
+                    return new Skill(id, arrOfStr[1]);
+                }
             }
         }
         return null;
